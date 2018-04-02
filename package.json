@@ -1,0 +1,23 @@
+{
+  "name": "quatation2-koa2-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WangQingye/quatation2-koa2-server.git"
+  },
+  "author": "wqy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WangQingye/quatation2-koa2-server/issues"
+  },
+  "homepage": "https://github.com/WangQingye/quatation2-koa2-server#readme",
+  "dependencies": {
+    "koa": "^2.5.0"
+  }
+}
