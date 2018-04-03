@@ -5,10 +5,6 @@ const ObjectId = Schema.Types.ObjectId
 
 const categorySchema = new Schema({
     name: String,
-    goods: [{
-        type: ObjectId,
-        ref: 'Good'
-    }],
     meta: {
         createdAt: {
             type: Date,

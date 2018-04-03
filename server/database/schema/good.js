@@ -8,12 +8,8 @@ const goodSchema = new Schema({
     name: String,
     format: String,
     nowStock: Number,
-    price: Number,
+    price: String,
     note: String,
-    category: {
-        type: ObjectId,
-        ref: 'Good'
-    },
     meta: {
         createdAt: {
             type: Date,

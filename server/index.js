@@ -1,20 +1,20 @@
 const Koa = require('koa')
 const mongoose = require('mongoose')
-const router = require('./routes')
+const bodyParser = require('koa-bodyparser');
 /* 数据库连接 */
 const {
     connect,
     initSchemas
-} = require('./database/init');
+} = require('./database/init')
 
+;
 (async () => {
     await connect()
     initSchemas()
-    // const Good = mongoose.model('Good')
-    // const goods = await Good.find({})
-    // console.log(goods)
 })()
+const router = require('./routes')
 const app = new Koa()
+app.use(bodyParser())
 app.use(router.routes())
     .use(router.allowedMethods())
 app.use(async (ctx, next) => {

@@ -29,4 +29,4 @@ opListSchema.pre('save', function (next) {
     }
     next()
 })
-mongoose.model('opList', opListSchema)
+mongoose.model('OpList', opListSchema)
