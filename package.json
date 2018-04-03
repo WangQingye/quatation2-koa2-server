@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/WangQingye/quatation2-koa2-server#readme",
   "dependencies": {
+    "glob": "^7.1.2",
     "koa": "^2.5.0",
+    "koa-router": "^7.4.0",
     "mongoose": "^5.0.12"
   }
 }

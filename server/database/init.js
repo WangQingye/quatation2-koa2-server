@@ -1,8 +1,15 @@
 const mongoose = require('mongoose')
 const db = 'mongodb://localhost/shunxin-goods'
+const glob = require('glob')
+const {
+    resolve
+} = require('path')
 
 mongoose.Promise = global.Promise
-
+exports.initSchemas = () => {
+    console.log(__dirname);
+    glob.sync(resolve(__dirname, './schema', '**/*.js')).forEach(require)
+}
 exports.connect = () => {
     let maxConnectTimes = 0
     return new Promise((resolve, reject) => {
@@ -11,6 +18,8 @@ exports.connect = () => {
         }
         mongoose.connect(db);
         mongoose.connection.on('disconnected', () => {
+            maxConnectTimes++
+            console.log('dasdas');
             if (maxConnectTimes < 5) {
                 mongoose.connect(db);
             } else {
@@ -19,8 +28,10 @@ exports.connect = () => {
         })
         mongoose.connection.once('open', () => {
             console.log('Mongodb Connected successfully')
+            resolve()
         })
         mongoose.connection.on('error', err => {
+            reject(err)
             console.log(err);
         })
     })
