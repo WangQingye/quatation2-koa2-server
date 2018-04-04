@@ -25,6 +25,7 @@ goodSchema.pre('save', function (next) {
     if (this.isNew) {
         this.meta.createdAt = this.meta.updatedAt = Date.now()
     } else {
+        console.log(123);
         this.meta.updatedAt = Date.now()
     }
     next()

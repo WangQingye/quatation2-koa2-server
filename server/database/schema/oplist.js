@@ -8,7 +8,6 @@ const opListSchema = new Schema({
     opNum: Number,
     afterOpNum: Number,
     note: String,
-    opDate: String,
     goodId: String, // 所属商品的ID
     meta: {
         createdAt: {
