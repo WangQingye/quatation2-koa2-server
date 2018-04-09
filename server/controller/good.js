@@ -14,20 +14,13 @@ class GoodManager {
         const Good = mongoose.model('Good');
         const Oplist = mongoose.model('OpList');
         console.log(ctx.request.body.name);
-        if (!ctx.request.body.name) {
-            ctx.body = {
-                code: 333,
-                msg: '商品不能没有名字哦'
-            }
-            return;
-        }
         const had = await Good.findOne({
             name: ctx.request.body.name
         })
         if (had) {
             ctx.body = {
                 code: 222,
-                msg: '已经有这个分类了'
+                msg: '已经有这个商品了哦'
             }
             return;
         }
@@ -38,7 +31,8 @@ class GoodManager {
             format: d.format,
             nowStock: d.nowStock,
             price: d.price,
-            note: d.note
+            note: d.note,
+            img: d.img
         })
         /* 第一次添加商品的时候添加一条修改记录 */
         await opManager.addOneOp({
@@ -61,20 +55,14 @@ class GoodManager {
     static async changeGood(ctx, next) {
         const Good = mongoose.model('Good');
         const d = ctx.request.body;
-        if (!d.name) {
-            ctx.body = {
-                code: 333,
-                msg: '商品不能没有名字哦'
-            }
-            return;
-        }
         ctx.body = await Good.findByIdAndUpdate(d.id, {
             category: d.category,
             name: d.name,
             format: d.format,
             nowStock: d.nowStock,
             price: d.price,
-            note: d.note
+            note: d.note,
+            img: d.img
         })
     }
     /* 库存管理 */

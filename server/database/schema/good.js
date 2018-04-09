@@ -9,6 +9,7 @@ const goodSchema = new Schema({
     format: String,
     nowStock: Number,
     price: String,
+    img: String,
     note: String,
     meta: {
         createdAt: {
