@@ -13,7 +13,6 @@ class GoodManager {
     static async addGood(ctx, next) {
         const Good = mongoose.model('Good');
         const Oplist = mongoose.model('OpList');
-        console.log(ctx.request.body.name);
         const had = await Good.findOne({
             name: ctx.request.body.name
         })

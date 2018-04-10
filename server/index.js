@@ -15,14 +15,20 @@ const {
 })()
 const router = require('./routes')
 const app = new Koa()
+// app.use(async (ctx, next) => {
+//     console.log(ctx.request)
+// })
 app.use(bodyParser())
 app.use(cors({
-    origin: 'http://localhost:8080'
+    // 为什么直接返回字符串‘*’不行，非要用函数才行呢，此问题待解决
+    origin: function (ctx) {
+        if (ctx.url === '/test') {
+            return false;
+        }
+        return '*';
+    },
 }))
 app.use(router.routes())
     .use(router.allowedMethods())
-app.use(async (ctx, next) => {
-    ctx.body = 'Hi Luke'
-})
 
 app.listen(2333);
