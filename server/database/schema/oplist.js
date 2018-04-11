@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const opListSchema = new Schema({
-    name: String,
     opType: Number,
     opNum: Number,
     afterOpNum: Number,

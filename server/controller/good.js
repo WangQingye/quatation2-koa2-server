@@ -35,7 +35,6 @@ class GoodManager {
         })
         /* 第一次添加商品的时候添加一条修改记录 */
         await opManager.addOneOp({
-            name: d.name,
             opType: 1, // 0为出库，1为入库
             opNum: d.nowStock,
             afterOpNum: d.nowStock,
@@ -45,8 +44,12 @@ class GoodManager {
     }
     static async delGood(ctx, next) {
         const Good = mongoose.model('Good');
-        const id = ctx.request.body.id
-        console.log(id);
+        const OpList = mongoose.model('OpList');
+        const id = ctx.query.id
+        /* 删除商品的时候，还需要删除它的库存记录 */
+        await OpList.remove({
+            goodId: id
+        })
         ctx.body = await Good.findByIdAndRemove({
             _id: id
         })
@@ -54,7 +57,8 @@ class GoodManager {
     static async changeGood(ctx, next) {
         const Good = mongoose.model('Good');
         const d = ctx.request.body;
-        ctx.body = await Good.findByIdAndUpdate(d.id, {
+        console.log(ctx.request.body);
+        ctx.body = await Good.findByIdAndUpdate(d._id, {
             category: d.category,
             name: d.name,
             format: d.format,
@@ -69,17 +73,16 @@ class GoodManager {
         const Good = mongoose.model('Good');
         const d = ctx.request.body;
         /* 修改存库量 */
-        await Good.findByIdAndUpdate(d.id, {
+        await Good.findByIdAndUpdate(d.goodId, {
             nowStock: d.afterOpNum,
         })
         /* 添加操作记录 */
         ctx.body = await opManager.addOneOp({
-            name: d.name,
             opType: d.opType, // 0为出库，1为入库
             opNum: d.opNum,
             afterOpNum: d.afterOpNum,
             note: d.note,
-            goodId: d.id, // 所属商品的ID
+            goodId: d.goodId, // 所属商品的ID
         })
     }
 }
