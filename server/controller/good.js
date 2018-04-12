@@ -85,6 +85,21 @@ class GoodManager {
             goodId: d.goodId, // 所属商品的ID
         })
     }
+
+    /* 获取商品种类 */
+    static async getCategory(ctx, next) {
+        const Good = mongoose.model('Good')
+        let categorys = [];
+        const goods = await Good.find({});
+        goods.forEach((good) => {
+            if (categorys.indexOf(good.category) == '-1') {
+                categorys.push(good.category)
+            }
+        });
+        ctx.body = {
+            categorys
+        }
+    }
 }
 
 module.exports = GoodManager
