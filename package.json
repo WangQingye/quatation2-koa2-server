@@ -23,6 +23,6 @@
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.4.0",
     "koa2-cors": "^2.0.5",
-    "mongoose": "^5.0.12"
+    "mongoose": "^5.7.5"
   }
 }
