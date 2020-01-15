@@ -10,8 +10,8 @@ const {
 
 ;
 (async () => {
-    await connect()
     initSchemas()
+    await connect()    
 })()
 const router = require('./routes')
 const app = new Koa()
